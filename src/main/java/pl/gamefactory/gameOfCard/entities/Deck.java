@@ -12,9 +12,9 @@ public class Deck {
     @Id
     private Long id;
 
-    private String deckName;
+    private List<Cards> cards;
 
-    List<Cards> cards;
+    private List<Cards> pile;
 
 
     public Long getId() {
@@ -25,13 +25,7 @@ public class Deck {
         this.id = id;
     }
 
-    public String getDeckName() {
-        return deckName;
-    }
 
-    public void setDeckName(String deckName) {
-        this.deckName = deckName;
-    }
 
     public List<Cards> getCards() {
         return cards;
@@ -40,12 +34,20 @@ public class Deck {
             this.cards = cards;
     }
 
+    public List<Cards> getPile() {
+        return pile;
+    }
+
+    public void setPile(List<Cards> pile) {
+        this.pile = pile;
+    }
+
     @Override
     public String toString() {
         return "Deck{" +
                 "id=" + id +
-                ", deckName='" + deckName + '\'' +
                 ", cards=" + cards +
+                ", pile=" + pile +
                 '}';
     }
 }

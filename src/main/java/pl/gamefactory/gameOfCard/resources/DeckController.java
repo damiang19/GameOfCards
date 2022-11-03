@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
+@CrossOrigin
 public class DeckController {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
     @Autowired
