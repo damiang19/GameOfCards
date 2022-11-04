@@ -8,8 +8,8 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import pl.gamefactory.gameOfCard.dto.JwtRequest;
-import pl.gamefactory.gameOfCard.dto.JwtResponse;
+import pl.gamefactory.gameOfCard.dto.JwtRequestDTO;
+import pl.gamefactory.gameOfCard.dto.JwtResponseDTO;
 import pl.gamefactory.gameOfCard.services.JwtUserDetailsService;
 import pl.gamefactory.gameOfCard.utils.JwtTokenUtil;
 
@@ -26,7 +26,7 @@ public class JwtAuthenticationController {
     private JwtUserDetailsService userDetailsService;
 
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequestDTO authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(), authenticationRequest.getPassword());
 
@@ -35,7 +35,7 @@ public class JwtAuthenticationController {
 
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponseDTO(token));
     }
 
     private void authenticate(String username, String password) throws Exception {

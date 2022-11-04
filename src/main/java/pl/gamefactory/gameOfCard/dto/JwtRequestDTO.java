@@ -1,15 +1,11 @@
 package pl.gamefactory.gameOfCard.dto;
 
-public class    JwtRequest {
+public class JwtRequestDTO {
     private String username;
     private String password;
 
-    public JwtRequest()
-    {
-
-    }
-
-    public JwtRequest(String username, String password) {
+    public JwtRequestDTO() {}
+    public JwtRequestDTO(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);
     }

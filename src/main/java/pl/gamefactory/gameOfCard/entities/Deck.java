@@ -14,9 +14,11 @@ public class Deck {
 
     private List<Cards> cards;
 
-    private List<Cards> pile;
+    private List<Cards> cardsOnTable;
 
+    public Deck(){
 
+    }
     public Long getId() {
         return id;
     }
@@ -25,8 +27,6 @@ public class Deck {
         this.id = id;
     }
 
-
-
     public List<Cards> getCards() {
         return cards;
     }
@@ -34,20 +34,11 @@ public class Deck {
             this.cards = cards;
     }
 
-    public List<Cards> getPile() {
-        return pile;
+    public List<Cards> getCardsOnTable() {
+        return cardsOnTable;
     }
 
-    public void setPile(List<Cards> pile) {
-        this.pile = pile;
-    }
-
-    @Override
-    public String toString() {
-        return "Deck{" +
-                "id=" + id +
-                ", cards=" + cards +
-                ", pile=" + pile +
-                '}';
+    public void setCardsOnTable(List<Cards> cardsOnTable) {
+        this.cardsOnTable = cardsOnTable;
     }
 }

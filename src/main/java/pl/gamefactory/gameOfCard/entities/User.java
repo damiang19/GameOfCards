@@ -2,9 +2,7 @@ package pl.gamefactory.gameOfCard.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
-
 import javax.persistence.*;
-import javax.persistence.Table;
 import java.util.List;
 
 
@@ -20,6 +18,7 @@ public class User {
 
     private List<Cards> cards;
 
+    private Long timeLeft;
     private Long deckId;
 
     public User() {
@@ -63,6 +62,14 @@ public class User {
 
     public void setDeckId(Long deckId) {
         this.deckId = deckId;
+    }
+
+    public Long getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(Long timeLeft) {
+        this.timeLeft = timeLeft;
     }
 
     @Override
