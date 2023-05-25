@@ -1,15 +1,12 @@
 package pl.gamefactory.gameOfCard.resources;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.http.ResponseEntity;
+import pl.gamefactory.gameOfCard.repository.DeckRepository;
+import pl.gamefactory.gameOfCard.entities.enums.Cards;
 import org.springframework.web.bind.annotation.*;
 import pl.gamefactory.gameOfCard.entities.Deck;
-import pl.gamefactory.gameOfCard.entities.enums.Cards;
-import pl.gamefactory.gameOfCard.repository.DeckRepository;
-
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,13 +24,4 @@ public class DeckController {
         LOG.info("Getting all decks ");
         return deckRepository.findAll();
     }
-
-    @PostMapping(value = "/decks")
-    public Deck createDeck(@RequestBody Deck deck) {
-        LOG.info("New deck has been created {}", deck);
-        deck.setCards(Arrays.stream(Cards.values()).toList());
-        return deckRepository.insert(deck);
-    }
-
-
 }

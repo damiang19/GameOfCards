@@ -1,5 +1,6 @@
 package pl.gamefactory.gameOfCard.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
 import javax.persistence.*;
@@ -9,11 +10,13 @@ import java.util.List;
 @Document("uzytkownik")
 public class User {
 
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
     @Id
     private String id;
 
     private String username;
-
+    @JsonIgnore
     private String password;
 
     private List<Cards> cards;

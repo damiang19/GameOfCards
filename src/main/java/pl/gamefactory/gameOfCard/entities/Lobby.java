@@ -4,10 +4,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.GameType;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Document("lobby")
 public class Lobby {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "lobby_sequence";
 
     @Id
     private Long id;

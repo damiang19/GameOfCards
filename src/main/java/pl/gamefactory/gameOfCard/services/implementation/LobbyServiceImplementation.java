@@ -19,28 +19,32 @@ public class LobbyServiceImplementation implements LobbyService {
 
     private final LobbyRepository lobbyRepository;
     private final UserService userService;
-
     private final DeckService deckService;
 
-    public LobbyServiceImplementation(LobbyRepository lobbyRepository, UserService userService, DeckService deckService) {
+    private final SequenceGeneratorService sequenceGeneratorService;
+
+    public LobbyServiceImplementation(LobbyRepository lobbyRepository, UserService userService, DeckService deckService, SequenceGeneratorService sequenceGeneratorService) {
         this.lobbyRepository = lobbyRepository;
         this.userService = userService;
         this.deckService = deckService;
+        this.sequenceGeneratorService = sequenceGeneratorService;
     }
 
 
     @Override
     public Lobby createLobby() {
-        Lobby lobby = new Lobby();
-        lobby.setId(1L);
-        lobby.setEnabled(false);
         Deck deck = deckService.createDeck();
-        lobby.setDeckId(deck.getId());
-        lobby.setGameType(GameType.FRIDAY_FOOL);
         List<User> userList = new ArrayList<>();
         userList.add(userService.findByUsername(SecurityUtils.getCurrentUserLogin().get()));
         userList.get(0).setDeckId(deck.getId());
+        userService.save(userList.get(0));
+
+        Lobby lobby = new Lobby();
+        lobby.setId(sequenceGeneratorService.generateSequence(Lobby.SEQUENCE_NAME));
+        lobby.setEnabled(false);
+        lobby.setGameType(GameType.FRIDAY_FOOL);
         lobby.setPlayers(userList);
+
         return lobbyRepository.save(lobby);
     }
 }

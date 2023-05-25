@@ -8,18 +8,19 @@ import pl.gamefactory.gameOfCard.services.UserService;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class FridayFoolResource {
+public class FridayFoolController {
 
     private final UserService userService;
 
 
-    public FridayFoolResource(UserService userService) {
+    public FridayFoolController(UserService userService) {
         this.userService = userService;
     }
 
     @MessageMapping("/game")
     @SendTo("/topic/friday-fool")
     public FrontendResponseDTO  updateGameLobby(@Payload FrontendResponseDTO frontendResponseDTO) throws Exception {
+
         return null;
     }
 }
