@@ -4,7 +4,6 @@ package pl.gamefactory.gameOfCard.services.implementation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.gamefactory.gameOfCard.entities.User;
@@ -31,6 +30,12 @@ public class UserServiceImplementation implements UserService {
         logger.info("Get all users");
         return userRepository.findAll();
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     @Override
     public User save(User user){
         logger.info("Creating new user");

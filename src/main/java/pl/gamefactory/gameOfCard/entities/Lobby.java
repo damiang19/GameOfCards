@@ -4,10 +4,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.GameType;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 import java.util.List;
 
 @Document("lobby")
 public class Lobby {
+
+    @Transient
+    public static final String SEQUENCE_NAME = "lobby_sequence";
 
     @Id
     private Long id;
@@ -16,13 +20,11 @@ public class Lobby {
 
     private GameType gameType;
 
-    private Long deckId;
-
     private List<User> players;
 
     private Boolean isEnabled;
 
-    private Long timeToEnd;
+    private Long gameTime;
 
 
     public Long getId() {
@@ -49,14 +51,6 @@ public class Lobby {
         this.gameType = gameType;
     }
 
-    public Long getDeckId() {
-        return deckId;
-    }
-
-    public void setDeckId(Long deckId) {
-        this.deckId = deckId;
-    }
-
     public List<User> getPlayers() {
         return players;
     }
@@ -73,12 +67,12 @@ public class Lobby {
         isEnabled = enabled;
     }
 
-    public Long getTimeToEnd() {
-        return timeToEnd;
+    public Long getGameTime() {
+        return gameTime;
     }
 
-    public void setTimeToEnd(Long timeToEnd) {
-        this.timeToEnd = timeToEnd;
+    public void setGameTime(Long gameTime) {
+        this.gameTime = gameTime;
     }
 
     @Override
@@ -87,10 +81,9 @@ public class Lobby {
                 "id=" + id +
                 ", lobbyName='" + lobbyName + '\'' +
                 ", gameType=" + gameType +
-                ", deckId=" + deckId +
                 ", players=" + players +
                 ", isEnabled=" + isEnabled +
-                ", timeToEnd=" + timeToEnd +
+                ", gameTime=" + gameTime +
                 '}';
     }
 }

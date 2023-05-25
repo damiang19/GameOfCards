@@ -1,3 +1,19 @@
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+
 # Compiled class file
 *.class
 
@@ -52,6 +68,16 @@ target/
 build/
 !**/src/main/**/build/
 !**/src/test/**/build/
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
 
 ### VS Code ###
 .vscode/

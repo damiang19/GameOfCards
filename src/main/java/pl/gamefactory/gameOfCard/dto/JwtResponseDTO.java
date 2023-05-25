@@ -1,9 +1,9 @@
 package pl.gamefactory.gameOfCard.dto;
 
-public class JwtResponse {
+public class JwtResponseDTO {
     private final String jwttoken;
 
-    public JwtResponse(String jwttoken) {
+    public JwtResponseDTO(String jwttoken) {
         this.jwttoken = jwttoken;
     }
     public String getToken() {
