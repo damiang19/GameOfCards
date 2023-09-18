@@ -5,8 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.gamefactory.gameOfCard.entities.User;
 import pl.gamefactory.gameOfCard.services.UserService;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
@@ -18,13 +19,13 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public ResponseEntity<List<User>> getAllUsers(){
+    public ResponseEntity<Flux<User>> getAllUsers(){
         return new ResponseEntity<>(userService.findAll(),HttpStatus.OK);
     }
 
     @PostMapping(value = "/register")
     public ResponseEntity<User> saveUser(@RequestBody User user) {
-       User newUser = userService.save(user);
+       Mono<User> newUser = userService.save(user);
        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 }

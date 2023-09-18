@@ -3,15 +3,14 @@ package pl.gamefactory.gameOfCard.entities;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
 
-import javax.persistence.*;
-import javax.persistence.Table;
+
 import java.util.List;
 
 
 @Document("uzytkownik")
 public class User {
 
-    @Id
+
     private String id;
 
     private String username;

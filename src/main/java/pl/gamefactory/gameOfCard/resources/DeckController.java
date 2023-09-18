@@ -8,31 +8,36 @@ import org.springframework.web.bind.annotation.*;
 import pl.gamefactory.gameOfCard.entities.Deck;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
 import pl.gamefactory.gameOfCard.repository.DeckRepository;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api")
-@CrossOrigin
 public class DeckController {
     private final Logger LOG = LoggerFactory.getLogger(getClass());
     @Autowired
     private  DeckRepository deckRepository;
 
 
-    @GetMapping(value = "/decks")
-    public List<Deck> getAllDecks() {
-        LOG.info("Getting all decks ");
-        return deckRepository.findAll();
-    }
-
+//    @GetMapping(value = "/decks")
+//    public List<Deck> getAllDecks() {
+//        LOG.info("Getting all decks ");
+//        return deckRepository.findAll();
+//    }
+//
     @PostMapping(value = "/decks")
-    public Deck createDeck(@RequestBody Deck deck) {
+    public Mono<Deck> createDeck(@RequestBody Deck deck) {
         LOG.info("New deck has been created {}", deck);
         deck.setCards(Arrays.stream(Cards.values()).toList());
         return deckRepository.insert(deck);
     }
 
+    @GetMapping(value = "/first-stream")
+    public Flux<String> stringStream() {
+        return Flux.just("a","b","c","d");
+    }
 
 }

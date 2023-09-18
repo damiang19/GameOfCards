@@ -3,13 +3,12 @@ package pl.gamefactory.gameOfCard.entities;
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
 
-import javax.persistence.*;
 import java.util.List;
 
 @Document("deck")
 public class Deck {
 
-    @Id
+
     private Long id;
 
     private List<Cards> cards;
