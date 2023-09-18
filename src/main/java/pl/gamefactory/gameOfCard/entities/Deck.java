@@ -24,8 +24,6 @@ public class Deck {
         this.id = id;
     }
 
-
-
     public List<Cards> getCards() {
         return cards;
     }
