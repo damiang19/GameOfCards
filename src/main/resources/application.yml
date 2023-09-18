@@ -1,6 +1,4 @@
 spring:
-  h2:
-    console.enabled: true
   data.mongodb:
     username: rootuser
     password: rootpass
@@ -8,13 +6,5 @@ spring:
     port: 27017
     host: localhost
     authentication-database: admin
-  datasource:
-    url: jdbc:h2:mem:testowa
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
 
-jwt:
-  secret: hahahah
+

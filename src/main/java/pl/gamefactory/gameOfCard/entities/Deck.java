@@ -2,25 +2,20 @@ package pl.gamefactory.gameOfCard.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import pl.gamefactory.gameOfCard.entities.enums.Cards;
-import javax.persistence.*;
+
 import java.util.List;
 
 @Document("deck")
 public class Deck {
 
-    @Transient
-    public static final String SEQUENCE_NAME = "deck_sequence";
 
-    @Id
     private Long id;
 
     private List<Cards> cards;
 
-    private List<Cards> cardsOnTable;
+    private List<Cards> pile;
 
-    public Deck(){
 
-    }
     public Long getId() {
         return id;
     }
@@ -36,12 +31,12 @@ public class Deck {
             this.cards = cards;
     }
 
-    public List<Cards> getCardsOnTable() {
-        return cardsOnTable;
+    public List<Cards> getPile() {
+        return pile;
     }
 
-    public void setCardsOnTable(List<Cards> cardsOnTable) {
-        this.cardsOnTable = cardsOnTable;
+    public void setPile(List<Cards> pile) {
+        this.pile = pile;
     }
 
     @Override
@@ -49,7 +44,7 @@ public class Deck {
         return "Deck{" +
                 "id=" + id +
                 ", cards=" + cards +
-                ", cardsOnTable=" + cardsOnTable +
+                ", pile=" + pile +
                 '}';
     }
 }
