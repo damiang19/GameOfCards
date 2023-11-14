@@ -3,7 +3,7 @@ package pl.gamefactory.gameOfCard.entities;
 import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
-import pl.gamefactory.gameOfCard.entities.enums.Cards;
+import pl.gamefactory.gameOfCard.dto.Cards;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
