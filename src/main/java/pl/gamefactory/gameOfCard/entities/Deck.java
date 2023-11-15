@@ -12,8 +12,9 @@ import java.util.List;
 @Builder
 @Getter
 public class Deck {
-    @Id String id;
-    List<Cards> cards;
-    List<Pile> pile;
-    Integer remainingCards;
+    @Id
+    private String id;
+    private List<Cards> cards;
+    private List<Pile> pile;
+    private Integer remainingCards;
 }

@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 @Getter
 public class Pile {
-
     private String name;
     private List<Cards> cards;
 

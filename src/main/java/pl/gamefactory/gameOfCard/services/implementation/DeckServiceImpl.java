@@ -3,6 +3,7 @@ package pl.gamefactory.gameOfCard.services.implementation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.gamefactory.gameOfCard.dto.Cards;
 import pl.gamefactory.gameOfCard.entities.Deck;
 import pl.gamefactory.gameOfCard.repository.DeckRepository;
@@ -23,6 +24,7 @@ public class DeckServiceImpl implements DeckService {
 
 
     @Override
+    @Transactional
     public Mono<Deck> generateDeck() {
         log.debug("Request to generate deck");
         return deckRepository.save(Deck.builder()

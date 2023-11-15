@@ -1,12 +1,10 @@
 package pl.gamefactory.gameOfCard.unit;
 
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.gamefactory.gameOfCard.GameOfCardApplication;
-import pl.gamefactory.gameOfCard.repository.DeckRepository;
 import pl.gamefactory.gameOfCard.services.DeckService;
 import reactor.test.StepVerifier;
 import static org.assertj.core.api.Assertions.*;
