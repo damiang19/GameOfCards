@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import pl.gamefactory.gameOfCard.dto.Cards;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Document("deck")
@@ -13,6 +14,7 @@ import java.util.List;
 @Getter
 public class Deck {
     @Id
+    @NotNull
     private String id;
     private List<Cards> cards;
     private List<Pile> pile;

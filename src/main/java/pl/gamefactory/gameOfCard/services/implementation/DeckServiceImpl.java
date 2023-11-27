@@ -10,7 +10,9 @@ import pl.gamefactory.gameOfCard.repository.DeckRepository;
 import pl.gamefactory.gameOfCard.services.DeckService;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DeckServiceImpl implements DeckService {
@@ -37,5 +39,11 @@ public class DeckServiceImpl implements DeckService {
     @Override
     public Deck save(Deck deck) {
         return null;
+    }
+
+    @Override
+    public Mono<Deck> getDeckById(@Valid String deckId) {
+        log.debug("Request to get deck with id : {}", deckId);
+        return deckRepository.findById(deckId);
     }
 }

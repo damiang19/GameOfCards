@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.gamefactory.gameOfCard.entities.Deck;
+import pl.gamefactory.gameOfCard.entities.Pile;
 import pl.gamefactory.gameOfCard.services.DeckService;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -22,7 +24,7 @@ public class DeckController {
 
 
 // Rozpiska endpointow :
-    // Utworzenie decku -
+    // Utworzenie decku - zrobione
 
     // 1. Dobranie kart z decku
     // 2. Przetasowanie kart
@@ -40,6 +42,11 @@ public class DeckController {
         return ResponseEntity.status(HttpStatus.CREATED).body(deck);
     }
 
+    @GetMapping(value = "/deck/{deckId}/piles/{pileName}")
+    public ResponseEntity<Flux<Pile>> getCardsFromDeck(@PathVariable String deckId, String pileName){
+
+        return null;
+    }
 
 
 }

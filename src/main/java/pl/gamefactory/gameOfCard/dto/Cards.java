@@ -8,8 +8,8 @@ import java.util.List;
 
 public class Cards {
 
-    private CardValue cardValue;
-    private CardColor cardColor;
+    private final CardValue cardValue;
+    private final CardColor cardColor;
 
     private Cards(CardValue cardValue, CardColor cardColor) {
         this.cardValue = cardValue;
