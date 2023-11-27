@@ -1,8 +1,17 @@
 package pl.gamefactory.gameOfCard.entities;
 
-import pl.gamefactory.gameOfCard.entities.enums.Cards;
+import lombok.Builder;
+import lombok.Getter;
+import org.springframework.data.mongodb.core.mapping.Document;
+import pl.gamefactory.gameOfCard.dto.Cards;
 
 import java.util.List;
 
-public record Pile(String name, List<Cards> cards) {
+@Document("deck")
+@Builder
+@Getter
+public class Pile {
+    private String name;
+    private List<Cards> cards;
+
 }
