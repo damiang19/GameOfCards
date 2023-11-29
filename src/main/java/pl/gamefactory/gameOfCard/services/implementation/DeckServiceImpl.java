@@ -42,7 +42,7 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
-    public Mono<Deck> getDeckById(@Valid String deckId) {
+    public Mono<Deck> getDeckById(String deckId) {
         log.debug("Request to get deck with id : {}", deckId);
         return deckRepository.findById(deckId);
     }

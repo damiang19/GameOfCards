@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 public class Deck {
     @Id
-    @NotNull
     private String id;
     private List<Cards> cards;
     private List<Pile> pile;
