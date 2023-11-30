@@ -13,8 +13,8 @@ import java.util.List;
 @Service
 public class PileServiceImpl implements PileService {
     @Override
-    public Mono<Pile> createPile(String pileName, List<Cards> cards) {
-        return null;
+    public Pile createPile(String pileName, List<Cards> cards) {
+        return Pile.builder().cards(cards).name(pileName).build();
     }
 
     @Override

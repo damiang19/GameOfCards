@@ -1,5 +1,6 @@
 package pl.gamefactory.gameOfCard.services;
 
+import pl.gamefactory.gameOfCard.dto.UpdatePilePayload;
 import pl.gamefactory.gameOfCard.entities.Deck;
 import pl.gamefactory.gameOfCard.entities.Pile;
 import reactor.core.publisher.Flux;
@@ -11,4 +12,5 @@ public interface DeckService {
     Mono<Deck> generateDeck();
     Deck save(Deck deck);
     Mono<Deck> getDeckById(String deckId);
+    void updateDeckPile(UpdatePilePayload updatePilePayload);
 }

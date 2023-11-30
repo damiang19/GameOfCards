@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.gamefactory.gameOfCard.dto.UpdatePilePayload;
 import pl.gamefactory.gameOfCard.entities.Deck;
 import pl.gamefactory.gameOfCard.entities.Pile;
 import pl.gamefactory.gameOfCard.services.DeckService;
@@ -42,8 +43,9 @@ public class DeckController {
         return ResponseEntity.status(HttpStatus.CREATED).body(deck);
     }
 
-    @GetMapping(value = "/deck/{deckId}/piles/{pileName}")
-    public ResponseEntity<Flux<Pile>> getCardsFromDeck(@PathVariable String deckId, String pileName){
+
+    @PutMapping(value = "/update-pile")
+    public ResponseEntity<Flux<Pile>> getCardsFromDeck(@RequestBody UpdatePilePayload updatePilePayload){
 
         return null;
     }

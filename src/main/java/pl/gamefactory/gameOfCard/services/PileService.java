@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 import java.util.List;
 
 public interface PileService {
-    Mono<Pile> createPile(String pileName, List<Cards> cards);
+    Pile createPile(String pileName, List<Cards> cards);
 
     Flux<Pile> updatePile(UpdatePilePayload updatePilePayload);
 }
