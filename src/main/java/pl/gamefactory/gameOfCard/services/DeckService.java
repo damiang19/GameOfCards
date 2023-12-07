@@ -12,5 +12,5 @@ public interface DeckService {
     Mono<Deck> generateDeck();
     Deck save(Deck deck);
     Mono<Deck> getDeckById(String deckId);
-    void updateDeckPile(UpdatePilePayload updatePilePayload);
+    Mono<Pile> updateDeckPile(UpdatePilePayload updatePilePayload);
 }

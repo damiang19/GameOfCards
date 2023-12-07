@@ -85,14 +85,14 @@ public class DeckServiceImpl implements DeckService {
     }
 
     @Override
-    public void updateDeckPile(UpdatePilePayload updatePilePayload) {
-        getDeckById(updatePilePayload.deckId()).subscribe(deck -> {
-            List<Cards> cards = deck.getCards();
-            if (updatePilePayload.numberOfCards() != null) {
-                List<Cards> cardsToSetup = drawNumberOfCards(cards, updatePilePayload.numberOfCards());
-
-            }
-            deckRepository.save(deck);
-        });
+    public Mono<Pile> updateDeckPile(UpdatePilePayload updatePilePayload) {
+        return getDeckById(updatePilePayload.deckId())
+                .map(deck -> {
+                    List<Cards> cards = deck.getCards();
+                    List<Cards> cardsToSetup = drawNumberOfCards(cards, updatePilePayload.numberOfCards());
+                    Pile pile =  updatePiles(deck, updatePilePayload.pileName(), cardsToSetup);
+                    deckRepository.save(deck);
+                    return pile;
+                });
     }
 }
