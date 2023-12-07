@@ -46,7 +46,7 @@ public class DeckController {
 
     @PutMapping(value = "/update-pile")
     public ResponseEntity<Flux<Pile>> getCardsFromDeck(@RequestBody UpdatePilePayload updatePilePayload){
-
+        log.debug("REST request to update pile");
         return null;
     }
 

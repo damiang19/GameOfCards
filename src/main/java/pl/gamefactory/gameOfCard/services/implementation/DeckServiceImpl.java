@@ -16,13 +16,11 @@ import reactor.core.publisher.Mono;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class DeckServiceImpl implements DeckService {
 
     private final Logger log = LoggerFactory.getLogger(getClass());
-
     private final PileService pileService;
     private final DeckRepository deckRepository;
 
@@ -66,25 +64,35 @@ public class DeckServiceImpl implements DeckService {
     }
 
     private List<Cards> drawSpecificCards(List<Cards> sourceListOfCard, List<Cards> destinationListOfCard) {
-
         return null;
     }
 
-    private void checkIfPileExist(Deck deck, String pileName) {
+    private Pile updatePiles(Deck deck, String pileName, List<Cards> cardsToSetup) {
         List<Pile> listOfPiles = deck.getPile();
-        Optional<Pile> optionalPile = listOfPiles.stream().filter(pile -> pile.getName().equals(pileName)).findFirst();
+        return listOfPiles.stream()
+                .filter(pile -> pile.getName().equals(pileName))
+                .findFirst()
+                .map(presentPile -> {
+                    int pileIndex = listOfPiles.indexOf(presentPile);
+                    presentPile.getCards().addAll(cardsToSetup);
+                    deck.getPile().set(pileIndex, presentPile);
+                    return presentPile;
+                }).orElseGet(() -> {
+                    Pile pile = pileService.createPile(pileName, cardsToSetup);
+                    deck.getPile().add(pileService.createPile(pileName, cardsToSetup));
+                    return pile;
+                });
     }
 
     @Override
     public void updateDeckPile(UpdatePilePayload updatePilePayload) {
         getDeckById(updatePilePayload.deckId()).subscribe(deck -> {
             List<Cards> cards = deck.getCards();
-            if(updatePilePayload.numberOfCards() != null) {
-                pileService.createPile(updatePilePayload.pileName(), drawNumberOfCards(cards,updatePilePayload.numberOfCards()));
-            } else {
-                pileService.createPile(updatePilePayload.pileName(), )
+            if (updatePilePayload.numberOfCards() != null) {
+                List<Cards> cardsToSetup = drawNumberOfCards(cards, updatePilePayload.numberOfCards());
 
             }
+            deckRepository.save(deck);
         });
     }
 }
