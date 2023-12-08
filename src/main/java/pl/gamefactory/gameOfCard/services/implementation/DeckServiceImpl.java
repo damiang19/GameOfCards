@@ -86,11 +86,14 @@ public class DeckServiceImpl implements DeckService {
 
     @Override
     public Mono<Pile> updateDeckPile(UpdatePilePayload updatePilePayload) {
-        return getDeckById(updatePilePayload.deckId())
+        String pileName = updatePilePayload.pileName();
+        String deckId = updatePilePayload.deckId();
+        log.debug("Request to update pile: {} for deck with id: {}", pileName, deckId);
+        return getDeckById(deckId)
                 .map(deck -> {
                     List<Cards> cards = deck.getCards();
                     List<Cards> cardsToSetup = drawNumberOfCards(cards, updatePilePayload.numberOfCards());
-                    Pile pile =  updatePiles(deck, updatePilePayload.pileName(), cardsToSetup);
+                    Pile pile = updatePiles(deck, pileName, cardsToSetup);
                     deckRepository.save(deck);
                     return pile;
                 });

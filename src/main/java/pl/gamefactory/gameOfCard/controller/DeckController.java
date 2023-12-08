@@ -12,6 +12,8 @@ import pl.gamefactory.gameOfCard.services.DeckService;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api")
 public class DeckController {
@@ -45,9 +47,11 @@ public class DeckController {
 
 
     @PutMapping(value = "/update-pile")
-    public ResponseEntity<Flux<Pile>> getCardsFromDeck(@RequestBody UpdatePilePayload updatePilePayload){
+    public Mono<ResponseEntity<Pile>> getCardsFromDeck(@RequestBody @Valid UpdatePilePayload updatePilePayload){
         log.debug("REST request to update pile");
-        return null;
+        return deckService.updateDeckPile(updatePilePayload)
+                .map(ResponseEntity.ok()::body)
+                .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
     }
 
 
