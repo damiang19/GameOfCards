@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface DeckService {
     Mono<Deck> generateDeck();
-    Deck save(Deck deck);
     Mono<Deck> getDeckById(String deckId);
     Mono<Pile> updateDeckPile(UpdatePilePayload updatePilePayload);
 }

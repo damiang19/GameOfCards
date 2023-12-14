@@ -14,8 +14,8 @@ import pl.gamefactory.gameOfCard.services.PileService;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DeckServiceImpl implements DeckService {
@@ -41,10 +41,6 @@ public class DeckServiceImpl implements DeckService {
                 .build());
     }
 
-    @Override
-    public Deck save(Deck deck) {
-        return null;
-    }
 
     @Override
     public Mono<Deck> getDeckById(String deckId) {
@@ -52,8 +48,9 @@ public class DeckServiceImpl implements DeckService {
         return deckRepository.findById(deckId);
     }
 
-    private List<Cards> drawNumberOfCards(List<Cards> cards, Integer count) {
+    private List<Cards> drawNumberOfCards(Deck deck, Integer count) {
         List<Cards> cardsToDraw = new ArrayList<>();
+        List<Cards> cards = deck.getCards();
         int deckSize = cards.size();
         for (int i = 0; i < count; i++) {
             Cards card = cards.get(deckSize - 1);
@@ -63,8 +60,18 @@ public class DeckServiceImpl implements DeckService {
         return cardsToDraw;
     }
 
-    private List<Cards> drawSpecificCards(List<Cards> sourceListOfCard, List<Cards> destinationListOfCard) {
+    private List<Cards> drawSpecificCards(List<Cards> sourceListOfCard, Deck deck) {
         return null;
+    }
+
+    private List<Cards> drawCardsFromDeck(UpdatePilePayload updatePilePayload, Deck deck) {
+        if (updatePilePayload.numberOfCards() != null) {
+            return drawNumberOfCards(deck, updatePilePayload.numberOfCards());
+        }
+        if (updatePilePayload.listOfCards() != null) {
+            return drawSpecificCards(updatePilePayload.listOfCards(), deck);
+        }
+        return Collections.emptyList();
     }
 
     private Pile updatePiles(Deck deck, String pileName, List<Cards> cardsToSetup) {
@@ -91,8 +98,7 @@ public class DeckServiceImpl implements DeckService {
         log.debug("Request to update pile: {} for deck with id: {}", pileName, deckId);
         return getDeckById(deckId)
                 .map(deck -> {
-                    List<Cards> cards = deck.getCards();
-                    List<Cards> cardsToSetup = drawNumberOfCards(cards, updatePilePayload.numberOfCards());
+                    List<Cards> cardsToSetup = drawCardsFromDeck(updatePilePayload, deck);
                     Pile pile = updatePiles(deck, pileName, cardsToSetup);
                     deckRepository.save(deck);
                     return pile;
